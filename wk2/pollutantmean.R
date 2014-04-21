@@ -1,7 +1,4 @@
-readdata <- function(dir, id) {
-    files <- sapply(id, function(i) { sprintf("%s/%03d.csv", dir, i) })
-    lapply(files, read.csv)
-}
+source('reader.R')
 
 pollutantmean <- function(dir, pollutant, id = 1:332) {
     data <- readdata(dir, id)
@@ -13,9 +10,3 @@ pollutantmean <- function(dir, pollutant, id = 1:332) {
     round(mean, 3)
 }
 
-complete <- function(dir, id = 1:332) {
-    data <- readdata(dir, id)
-    cases <- lapply(data, complete.cases)
-    sums <- sapply(cases, sum)
-    data.frame(id = id, nobjs = sums)
-}
